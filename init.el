@@ -17,7 +17,9 @@
 			magit
 			zenburn-theme
 			git-gutter
-			undo-tree))
+			undo-tree
+			cl-lib
+			dash))
 
   (dolist (p my-packages)
     (when (not (package-installed-p p)) (package-install p)))
