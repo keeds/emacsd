@@ -5,7 +5,7 @@
   (add-to-list 'package-archives
 	       '("melpa" . "http://melpa.milkbox.net/packages/"))
 	       ;; '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (package-refresh-contents)
+  ;; (package-refresh-contents)
   (package-initialize)
 
   (defvar my-packages '(clojure-mode
@@ -24,9 +24,6 @@
 
   ;; theme
   (load-theme 'zenburn t)
-
-  ;; hook
-  (add-hook 'clojure-mode-hook 'paredit-mode)
 
   ;; setup
   (tool-bar-mode -1)
@@ -50,6 +47,13 @@
 
   ;; undo-tree
   (require 'undo-tree)
-  (global-undo-tree-mode 1))
+  (global-undo-tree-mode 1)
+
+  ;; git-gutter
+  (global-git-gutter-mode t)
+
+  ;; hook
+  (add-hook 'clojure-mode-hook 'paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook 'paredit-mode))
   
 (add-hook 'after-init-hook 'my-package-complete)
