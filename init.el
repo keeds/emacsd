@@ -89,8 +89,7 @@
 		   (mode . emacs-lisp-mode)
 		   (mode . clojure-mode)
 		   ;; etc
-		   )) 
-		 ("ERC"   (mode . erc-mode))))))
+		   ))))))
   
   (add-hook 'ibuffer-mode-hook
 	    (lambda ()
