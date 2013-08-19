@@ -5,7 +5,7 @@
   (add-to-list 'package-archives
 	       '("melpa" . "http://melpa.milkbox.net/packages/"))
 	       ;; '("marmalade" . "http://marmalade-repo.org/packages/"))
-  ;; (package-refresh-contents)
+  (package-refresh-contents)
   (package-initialize)
 
   (defvar my-packages '(clojure-mode
@@ -19,7 +19,9 @@
 			git-gutter
 			undo-tree
 			cl-lib
-			dash))
+			dash
+			rainbow-delimiters
+			highlight-parentheses))
 
   (dolist (p my-packages)
     (when (not (package-installed-p p)) (package-install p)))
@@ -54,8 +56,27 @@
   ;; git-gutter
   (global-git-gutter-mode t)
 
+  ;; parens
+  (require 'rainbow-delimiters)
+  (require 'highlight-parentheses)
+
+  ;; nrepl
+  (require 'nrepl)
+  (require 'ac-nrepl)
+  (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+  (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+  (eval-after-load "auto-complete"
+    '(add-to-list 'ac-modes 'nrepl-mode))
+
   ;; hook
   (add-hook 'clojure-mode-hook 'paredit-mode)
+  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
+
+  (add-hook 'nrepl-mode-hook 'paredit-mode)
+  (add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'nrepl-mode-hook 'highlight-parentheses-mode)
+  
   (add-hook 'emacs-lisp-mode-hook 'paredit-mode))
   
 (add-hook 'after-init-hook 'my-package-complete)
