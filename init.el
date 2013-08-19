@@ -21,7 +21,8 @@
 			cl-lib
 			dash
 			rainbow-delimiters
-			highlight-parentheses))
+			highlight-parentheses
+			pg))
 
   (dolist (p my-packages)
     (when (not (package-installed-p p)) (package-install p)))
@@ -67,6 +68,35 @@
   (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
   (eval-after-load "auto-complete"
     '(add-to-list 'ac-modes 'nrepl-mode))
+
+  ;; postgres
+  (require 'pg)
+
+
+  ;; ibuffer
+  (require 'ibuffer)
+
+  (setq ibuffer-saved-filter-groups
+	(quote (("default"      
+		 ("Org" ;; all org-related buffers
+		  (mode . org-mode))  
+		 ("WS5"
+		  (filename . "Projects/ws5"))
+		 ("MRep"
+		  (filename . "Projects/mrep"))
+		 ("Programming" ;; prog stuff not already in MyProjectX
+		  (or
+		   (mode . emacs-lisp-mode)
+		   (mode . clojure-mode)
+		   ;; etc
+		   )) 
+		 ("ERC"   (mode . erc-mode))))))
+  
+  (add-hook 'ibuffer-mode-hook
+	    (lambda ()
+	      (ibuffer-switch-to-saved-filter-groups "default")))
+  
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
 
   ;; hook
   (add-hook 'clojure-mode-hook 'paredit-mode)
