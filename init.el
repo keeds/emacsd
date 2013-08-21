@@ -11,6 +11,8 @@
   (defvar my-packages '(clojure-mode
 			clojure-cheatsheet
 			clojure-snippets
+			align-cljlet
+			cljsbuild-mode
 			paredit
 			nrepl
 			ac-nrepl
@@ -62,6 +64,10 @@
   (require 'rainbow-delimiters)
   (require 'highlight-parentheses)
 
+  ;; align-cljlet
+  (require 'align-cljlet)
+  (global-set-key (kbd "C-M-z") 'align-cljlet)
+
   ;; nrepl
   (require 'nrepl)
   (require 'ac-nrepl)
@@ -97,6 +103,9 @@
 	      (ibuffer-switch-to-saved-filter-groups "default")))
   
   (global-set-key (kbd "C-x C-b") 'ibuffer)
+  
+  ;; mac osx pound sign
+  (define-key global-map (kbd "C-c 3") (lambda () (interactive) (insert "#")))
 
   ;; hook
   (add-hook 'clojure-mode-hook 'paredit-mode)
