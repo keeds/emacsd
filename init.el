@@ -15,6 +15,7 @@
 			cljsbuild-mode
 			paredit
 			nrepl
+			auto-complete
 			ac-nrepl
 			magit
 			zenburn-theme
@@ -48,33 +49,56 @@
 	scroll-conservatively 100000
 	scroll-preserve-screen-position 1)
 
+
   ;; line numbers
   (line-number-mode t)
   (column-number-mode t)
   (size-indication-mode t)
 
+  
   ;; undo-tree
   (require 'undo-tree)
   (global-undo-tree-mode 1)
 
+
   ;; git-gutter
   (global-git-gutter-mode t)
+
 
   ;; parens
   (require 'rainbow-delimiters)
   (require 'highlight-parentheses)
 
+
   ;; align-cljlet
   (require 'align-cljlet)
   (global-set-key (kbd "C-M-z") 'align-cljlet)
+
+
+  ;; auto-complete
+  (require 'auto-complete)
+  (require 'auto-complete-config)
+  (ac-config-default)
+  (global-auto-complete-mode t)
+
+  (dolist (mode '(clojure-mode lisp-mode magit-log-edit-mode))
+    (add-to-list 'ac-modes mode))
+  
 
   ;; nrepl
   (require 'nrepl)
   (require 'ac-nrepl)
   (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
   (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+
   (eval-after-load "auto-complete"
     '(add-to-list 'ac-modes 'nrepl-mode))
+
+  (defun live-nrepl-set-print-length ()
+    (nrepl-send-string-sync "(set! *print-length* 100)" "clojure.core"))
+
+  (add-hook 'nrepl-connected-hook 'live-nrepl-set-print-length)
+
 
   ;; postgres
   (require 'pg)
