@@ -128,7 +128,9 @@
 		  (filename . "Projects/ws5"))
 		 ("MRep"
 		  (filename . "Projects/mrep"))
-		 ("Programming" ;; prog stuff not already in MyProjectX
+		 ("CMRMapping"
+		  (filename . "Projects/cmrmapping"))
+		 ("Programming" ;; prog stuff not already in MyProject
 		  (or
 		   (mode . emacs-lisp-mode)
 		   (mode . clojure-mode)
