@@ -28,7 +28,8 @@
 			pg
 			yaml-mode
 			graphviz-dot-mode
-			helm))
+			helm
+			smartparens))
 
   (dolist (p my-packages)
     (when (not (package-installed-p p)) (package-install p)))
@@ -85,6 +86,10 @@
   ;; parens
   (require 'rainbow-delimiters)
   (require 'highlight-parentheses)
+
+  
+  ;; smartparens
+  ;; (require 'smartparens-config)
 
 
   ;; align-cljlet
@@ -172,6 +177,7 @@
   (add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'nrepl-mode-hook 'highlight-parentheses-mode)
   
-  (add-hook 'emacs-lisp-mode-hook 'paredit-mode))
+  (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+  )
   
 (add-hook 'after-init-hook 'my-package-complete)
