@@ -44,7 +44,7 @@
 		      (volatile)
 		      (headline "^[;(]")))))
 
-  (global-set-key (kbd "C-x C-;") 'helm-clojure-headlines)
+  (global-set-key (kbd "C-c ;") 'helm-clojure-headlines)
 
   
   ;; theme
