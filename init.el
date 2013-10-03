@@ -1,11 +1,4 @@
 
-(defun helm-clojure-headlines ()
-  "Display headlines for the current Clojure file."
-  (interactive)
-  (helm :sources '(((name . "Clojure Headlines")
-                    (volatile)
-                    (headline "^[;(]")))))
-
 (defun my-package-complete ()
 
   (require 'package)
@@ -34,11 +27,26 @@
 			highlight-parentheses
 			pg
 			yaml-mode
-			graphviz-dot-mode))
+			graphviz-dot-mode
+			helm))
 
   (dolist (p my-packages)
     (when (not (package-installed-p p)) (package-install p)))
 
+  ;; HELM
+  (require 'helm)
+  (helm-mode 1)
+
+  (defun helm-clojure-headlines ()
+    "Display headlines for the current Clojure file."
+    (interactive)
+    (helm :sources '(((name . "Clojure Headlines")
+		      (volatile)
+		      (headline "^[;(]")))))
+
+  (global-set-key (kbd "C-x C-;") 'helm-clojure-headlines)
+
+  
   ;; theme
   (load-theme 'zenburn t)
 
