@@ -29,7 +29,8 @@
 			yaml-mode
 			graphviz-dot-mode
 			helm
-			smartparens))
+			org
+			org-journal))
 
   (dolist (p my-packages)
     (when (not (package-installed-p p)) (package-install p)))
