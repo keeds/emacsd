@@ -3,14 +3,15 @@
 
   (require 'package)
   (add-to-list 'package-archives
-	       '("melpa" . "http://melpa.milkbox.net/packages/"))
-	       ;; '("marmalade" . "http://marmalade-repo.org/packages/"))
+	       ;; '("melpa" . "http://melpa.milkbox.net/packages/")
+	       '("marmalade" . "http://marmalade-repo.org/packages/")
+	       )
   (package-refresh-contents)
   (package-initialize)
 
   (defvar my-packages '(clojure-mode
-			clojure-cheatsheet
-			clojure-snippets
+			;; clojure-cheatsheet
+			;; clojure-snippets
 			align-cljlet
 			cljsbuild-mode
 			paredit
@@ -28,7 +29,7 @@
 			pg
 			yaml-mode
 			graphviz-dot-mode
-			helm
+			;; helm
 			org
 			org-journal))
 
@@ -36,17 +37,17 @@
     (when (not (package-installed-p p)) (package-install p)))
 
   ;; HELM
-  (require 'helm)
-  (helm-mode 1)
+  ;; (require 'helm)
+  ;; (helm-mode 1)
 
-  (defun helm-clojure-headlines ()
-    "Display headlines for the current Clojure file."
-    (interactive)
-    (helm :sources '(((name . "Clojure Headlines")
-		      (volatile)
-		      (headline "^[;(]")))))
+  ;; (defun helm-clojure-headlines ()
+  ;;   "Display headlines for the current Clojure file."
+  ;;   (interactive)
+  ;;   (helm :sources '(((name . "Clojure Headlines")
+  ;; 		      (volatile)
+  ;; 		      (headline "^[;(]")))))
 
-  (global-set-key (kbd "C-c ;") 'helm-clojure-headlines)
+  ;; (global-set-key (kbd "C-c ;") 'helm-clojure-headlines)
 
   
   ;; theme
