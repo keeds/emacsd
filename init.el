@@ -201,6 +201,15 @@
   ;; (add-hook 'nrepl-mode-hook 'highlight-parentheses-mode)
   
   ;; (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+
+  ;; org-mode
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-cc" 'org-capture)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cb" 'org-iswitchb)
+
+  (add-hook 'org-mode-hook 'turn-on-font-lock)
+
   )
   
 (add-hook 'after-init-hook 'my-package-complete)
