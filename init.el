@@ -3,8 +3,8 @@
 
   (require 'package)
   (add-to-list 'package-archives
-	       '("melpa" . "http://melpa.milkbox.net/packages/")
-	       ;;'("marmalade" . "http://marmalade-repo.org/packages/")
+	       ;; '("melpa" . "http://melpa.milkbox.net/packages/")
+	       '("marmalade" . "http://marmalade-repo.org/packages/")
 	       )
   (package-refresh-contents)
   (package-initialize)
@@ -19,9 +19,9 @@
 			cljsbuild-mode
 			eldoc
 			paredit
-			;; nrepl
+			nrepl
 			auto-complete
-			;; ac-nrepl
+			ac-nrepl
 			magit
 			zenburn-theme
 			git-gutter
@@ -34,10 +34,11 @@
 			yaml-mode
 			graphviz-dot-mode
 			;; helm
-			org
-			org-journal
-			smartparens
-			htmlize))
+			;; org
+			;; org-journal
+			;; smartparens
+			;; htmlize
+			))
 
   (dolist (p my-packages)
     (when (not (package-installed-p p)) (package-install p)))
@@ -104,14 +105,14 @@
   (dolist (mode '(clojure-mode lisp-mode magit-log-edit-mode))
     (add-to-list 'ac-modes mode))
 
-  (require 'smartparens-config)
-  (smartparens-global-strict-mode t)
-  (show-smartparens-global-mode t)
+  ;; (require 'smartparens-config)
+  ;; (smartparens-global-strict-mode t)
+  ;; (show-smartparens-global-mode t)
 
-  (define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
-  (define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
-  (define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
-  (define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
+  ;; (define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
+  ;; (define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
+  ;; (define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
+  ;; (define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
 
   ;; CIDER
   (require 'cider)
@@ -120,34 +121,30 @@
   (add-hook 'cider-repl-mode-hook 'smartparens-mode)
   (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
-  (setq nrepl-hide-special-buffers t)
+  ;; (setq nrepl-hide-special-buffers t)
 
   ;; nrepl
-  ;; (require 'nrepl)
-  ;; (require 'ac-nrepl)
-  ;; (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
-  ;; (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
-  ;; (add-hook 'nrepl-interaction-mode-hook
-  ;; 	    'nrepl-turn-on-eldoc-mode)
+  (require 'nrepl)
+  (require 'ac-nrepl)
+  (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+  (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+  (add-hook 'nrepl-interaction-mode-hook
+  	    'nrepl-turn-on-eldoc-mode)
 
-  ;; (eval-after-load "auto-complete"
-  ;;  '(add-to-list 'ac-modes 'nrepl-mode))
-
+  (eval-after-load "auto-complete"
+   '(add-to-list 'ac-modes 'nrepl-mode))
 
   (defun set-auto-complete-as-completion-at-point-function ()
     (setq completion-at-point-functions '(auto-complete)))
 
   (add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+  (add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
+  (add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
+  (define-key nrepl-interaction-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc)
 
-  ;; (add-hook 'nrepl-mode-hook 'set-auto-complete-as-completion-at-point-function)
-  ;; (add-hook 'nrepl-interaction-mode-hook 'set-auto-complete-as-completion-at-point-function)
-
-  ;; (define-key nrepl-interaction-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc)
-
-  ;; (defun live-nrepl-set-print-length ()
-  ;;  (nrepl-send-string-sync "(set! *print-length* 100)" "clojure.core"))
-
-  ;; (add-hook 'nrepl-connected-hook 'live-nrepl-set-print-length)
+  (defun live-nrepl-set-print-length ()
+  (nrepl-send-string-sync "(set! *print-length* 100)" "clojure.core"))
+  (add-hook 'nrepl-connected-hook 'live-nrepl-set-print-length)
 
 
   ;; postgres
@@ -191,16 +188,16 @@
   (define-key global-map (kbd "C-c 3") (lambda () (interactive) (insert "#")))
 
   ;; hook
-  ;; (add-hook 'clojure-mode-hook 'paredit-mode)
-  (add-hook 'clojure-mode-hook 'smartparens-mode)
+  (add-hook 'clojure-mode-hook 'paredit-mode)
+  ;; (add-hook 'clojure-mode-hook 'smartparens-mode)
   (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
 
-  ;; (add-hook 'nrepl-mode-hook 'paredit-mode)
-  ;; (add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
-  ;; (add-hook 'nrepl-mode-hook 'highlight-parentheses-mode)
+  (add-hook 'nrepl-mode-hook 'paredit-mode)
+  (add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'nrepl-mode-hook 'highlight-parentheses-mode)
   
-  ;; (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+  (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
   ;; org-mode
   (global-set-key "\C-cl" 'org-store-link)
@@ -213,3 +210,17 @@
   )
   
 (add-hook 'after-init-hook 'my-package-complete)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Dropbox/org/2013/2013-plan.org"))))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
