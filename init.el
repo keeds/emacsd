@@ -10,11 +10,12 @@
   (package-initialize)
 
   (defvar my-packages '(clojure-mode
- 			;; clojurescript-mode
+ 			clojurescript-mode
 			clojure-test-mode
 			cider
 			;; clojure-cheatsheet
 			;; clojure-snippets
+			cljdoc
 			align-cljlet
 			cljsbuild-mode
 			eldoc
@@ -34,7 +35,9 @@
 			yaml-mode
 			graphviz-dot-mode
 			;; helm
-			;; org
+			org
+			org-trello
+			org-journal
 			;; org-journal
 			;; smartparens
 			;; htmlize
