@@ -13,8 +13,6 @@
  			clojurescript-mode
 			clojure-test-mode
 			cider
-			;; clojure-cheatsheet
-			;; clojure-snippets
 			cljdoc
 			align-cljlet
 			cljsbuild-mode
@@ -31,35 +29,15 @@
 			dash
 			rainbow-delimiters
 			highlight-parentheses
-			;; pg
 			yaml-mode
 			graphviz-dot-mode
-			;; helm
 			org
-			org-trello
-			org-journal
-			;; org-journal
-			;; smartparens
-			;; htmlize
 			))
 
   (dolist (p my-packages)
     (when (not (package-installed-p p)) (package-install p)))
 
-  ;; HELM
-  ;; (require 'helm)
-  ;; (helm-mode 1)
 
-  ;; (defun helm-clojure-headlines ()
-  ;;   "Display headlines for the current Clojure file."
-  ;;   (interactive)
-  ;;   (helm :sources '(((name . "Clojure Headlines")
-  ;; 		      (volatile)
-  ;; 		      (headline "^[;(]")))))
-
-  ;; (global-set-key (kbd "C-c ;") 'helm-clojure-headlines)
-
-  
   ;; theme
   (load-theme 'zenburn t)
 
@@ -110,20 +88,10 @@
   (dolist (mode '(clojure-mode lisp-mode magit-log-edit-mode))
     (add-to-list 'ac-modes mode))
 
-  ;; (require 'smartparens-config)
-  ;; (smartparens-global-strict-mode t)
-  ;; (show-smartparens-global-mode t)
-
-  ;; (define-key sp-keymap (kbd "C-<right>") 'sp-forward-slurp-sexp)
-  ;; (define-key sp-keymap (kbd "C-<left>") 'sp-forward-barf-sexp)
-  ;; (define-key sp-keymap (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
-  ;; (define-key sp-keymap (kbd "C-M-<right>") 'sp-backward-barf-sexp)
-
   ;; CIDER
   (require 'cider)
   (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-  ;; (add-hook 'cider-repl-mode-hook 'paredit-mode)
-  (add-hook 'cider-repl-mode-hook 'smartparens-mode)
+  (add-hook 'cider-repl-mode-hook 'paredit-mode)
   (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
   ;; (setq nrepl-hide-special-buffers t)
@@ -150,11 +118,6 @@
   (defun live-nrepl-set-print-length ()
   (nrepl-send-string-sync "(set! *print-length* 100)" "clojure.core"))
   (add-hook 'nrepl-connected-hook 'live-nrepl-set-print-length)
-
-
-  ;; postgres
-  ;; (require 'pg)
-
 
   ;; ibuffer
   (require 'ibuffer)
@@ -194,7 +157,6 @@
 
   ;; hook
   (add-hook 'clojure-mode-hook 'paredit-mode)
-  ;; (add-hook 'clojure-mode-hook 'smartparens-mode)
   (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
   (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
 
