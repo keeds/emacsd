@@ -95,6 +95,8 @@
   (require 'rainbow-delimiters)
   (require 'highlight-parentheses)
 
+  (require 'cljdoc)
+
   ;; align-cljlet
   (require 'align-cljlet)
   (global-set-key (kbd "C-M-z") 'align-cljlet)
