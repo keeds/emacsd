@@ -6,6 +6,8 @@
 (blink-cursor-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(set-face-attribute 'default nil :height 175)
+
 ;; mac osx pound sign
 (global-set-key (kbd "M-3") (lambda () (interactive) (insert "#")))
 (define-key global-map (kbd "C-c 3") (lambda () (interactive) (insert "#")))
