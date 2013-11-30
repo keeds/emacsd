@@ -6,7 +6,7 @@
 (blink-cursor-mode -1)
 (fset 'yes-or-no-p 'y-or-n-p)
 
-(set-face-attribute 'default nil :height 175)
+(set-face-attribute 'default nil :height 150)
 
 ;; mac osx pound sign
 (global-set-key (kbd "M-3") (lambda () (interactive) (insert "#")))
@@ -46,12 +46,17 @@
 		      highlight-parentheses
 		      yaml-mode
 		      graphviz-dot-mode
+		      exec-path-from-shell
+		      sass-mode
 		      ;; org
 		      ))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p)) (package-install p)))
 
+(require 'exec-path-from-shell)
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 ;; magit
 (global-set-key (kbd "C-c C-g") 'magit-status)
