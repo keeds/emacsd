@@ -2,3 +2,5 @@ elpa
 auto-save-list
 eshell
 /ac-comphist.dat
+/cider-history
+/url/cookies
