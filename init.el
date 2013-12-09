@@ -19,40 +19,43 @@
 (global-set-key (kbd "M-3") (lambda () (interactive) (insert "#")))
 (define-key global-map (kbd "C-c 3") (lambda () (interactive) (insert "#")))
 
+(require 'cl)
 (require 'package)
 (add-to-list 'package-archives
 	     '("melpa" .
-	       "http://melpa.milkbox.net/packages/"))
+	       "http://melpa.milkbox.net/packages/") t)
 
-(add-to-list 'package-archives
-	     '("marmalade" .
-	       "http://marmalade-repo.org/packages/"))
+;; (add-to-list 'package-archives
+;; 	     '("marmalade" .
+;; 	       "http://marmalade-repo.org/packages/"))
 
-;; (package-refresh-contents)
+(package-refresh-contents)
 (package-initialize)
 
-(defvar my-packages '(clojure-mode
-		      clojurescript-mode
+(defvar my-packages '(dash
+		      clojure-mode
 		      clojure-test-mode
 		      cider
-		      cljdoc
-		      align-cljlet
-		      cljsbuild-mode
+		      pkg-info
+		      gist
+		      ;; clojurescript-mode
+		      ;; cljdoc
+		      ;; align-cljlet
+		      ;; cljsbuild-mode
 		      eldoc
 		      paredit
-		      nrepl
+		      ;; nrepl
 		      auto-complete
 		      ac-nrepl
 		      magit
 		      zenburn-theme
 		      git-gutter
 		      undo-tree
-		      cl-lib
-		      dash
+		      ;; cl-lib
 		      rainbow-delimiters
 		      highlight-parentheses
 		      yaml-mode
-		      graphviz-dot-mode
+		      ;; graphviz-dot-mode
 		      exec-path-from-shell
 		      sass-mode
 		      ;; org
@@ -98,8 +101,9 @@
 (require 'highlight-parentheses)
 
 ;; align-cljlet
-(require 'align-cljlet)
-(global-set-key (kbd "C-M-z") 'align-cljlet)
+;; (require 'align-cljlet)
+;; (global-set-key (kbd "C-M-z") 'align-cljlet)
+
 
 ;; auto-complete
 (require 'auto-complete)
@@ -110,28 +114,42 @@
 (dolist (mode '(clojure-mode lisp-mode magit-log-edit-mode))
   (add-to-list 'ac-modes mode))
 
+
 ;; CIDER
+(require 'eldoc)
+(require 'cider)
 (setq cider-repl-wrap-history t)
 (setq cider-repl-history-size 1000)
 (setq cider-repl-history-file "~/.emacs.d/cider-history")
 
-(require 'cider)
-(add-hook 'cider-repl-mode-hook 'subword-mode)
-
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
 (add-hook 'cider-repl-mode-hook 'cider-turn-on-eldoc-mode)
 
-(add-hook 'cider-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-
+(add-hook 'cider-repl-mode-hook 'subword-mode)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
+;; ac-nrepl
+(require 'ac-nrepl)
+(add-hook 'cider-repl-hook-mode 'ac-nrepl-setup)
+(add-hook 'cider-mode 'ac-nrepl-setup)
+
+;; (eval-after-load "auto-complete"
+;;   '(add-to-list 'ac-modes 'cider-repl-mode))
+
 (eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'cider-repl-mode))
+  '(add-to-list 'ac-modes 'cider-mode 'cider-repl-mode))
 
 (defun set-auto-complete-as-completion-at-point-function ()
   (setq completion-at-point-functions '(auto-complete)))
+(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
+(add-hook 'cider-repl-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+
 
 ;; ibuffer
 (require 'ibuffer)
