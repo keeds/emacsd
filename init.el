@@ -138,7 +138,7 @@
 ;;   '(add-to-list 'ac-modes 'cider-repl-mode))
 
 (eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'cider-mode 'cider-repl-mode))
+  '(add-to-list 'ac-modes 'cider-repl-mode))
 
 (defun set-auto-complete-as-completion-at-point-function ()
   (setq completion-at-point-functions '(auto-complete)))
@@ -147,8 +147,8 @@
 (add-hook 'cider-repl-mode-hook 'set-auto-complete-as-completion-at-point-function)
 (add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
 
-(defun set-auto-complete-as-completion-at-point-function ()
-  (setq completion-at-point-functions '(auto-complete)))
+(eval-after-load "cider"
+  '(define-key cider-mode-map (kbd "C-c C-d") 'ac-nrepl-popup-doc))
 
 
 ;; ibuffer
