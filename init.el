@@ -8,6 +8,13 @@
 
 (set-face-attribute 'default nil :height 150)
 
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward
+      uniquify-separator ":"
+      uniquify-after-kill-buffer-p t
+      uniquify-ignore-buffers-re "^\\*")
+
+
 ;; mac osx pound sign
 (global-set-key (kbd "M-3") (lambda () (interactive) (insert "#")))
 (define-key global-map (kbd "C-c 3") (lambda () (interactive) (insert "#")))
