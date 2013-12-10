@@ -51,7 +51,7 @@
 		      zenburn-theme
 		      git-gutter
 		      undo-tree
-		      ;; cl-lib
+		      cl-lib
 		      rainbow-delimiters
 		      highlight-parentheses
 		      yaml-mode
