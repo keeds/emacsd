@@ -40,11 +40,10 @@
 		      gist
 		      ;; clojurescript-mode
 		      ;; cljdoc
-		      ;; align-cljlet
+		      align-cljlet
 		      ;; cljsbuild-mode
 		      eldoc
 		      paredit
-		      ;; nrepl
 		      auto-complete
 		      ac-nrepl
 		      magit
@@ -101,8 +100,8 @@
 (require 'highlight-parentheses)
 
 ;; align-cljlet
-;; (require 'align-cljlet)
-;; (global-set-key (kbd "C-M-z") 'align-cljlet)
+(require 'align-cljlet)
+(global-set-key (kbd "C-M-z") 'align-cljlet)
 
 
 ;; auto-complete
