@@ -29,7 +29,7 @@
 ;; 	     '("marmalade" .
 ;; 	       "http://marmalade-repo.org/packages/"))
 
-(package-refresh-contents)
+;; (package-refresh-contents)
 (package-initialize)
 
 (defvar my-packages '(dash
@@ -58,6 +58,7 @@
 		      exec-path-from-shell
 		      sass-mode
 		      ;; org
+		      clj-refactor
 		      ))
 
 (dolist (p my-packages)
@@ -185,11 +186,16 @@
 ;; clojure-mode
 (setq clojure-defun-style-default-indent t)
  
+(require 'clj-refactor)
+
 ;; hook
 (add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'clojure-mode-hook 'highlight-parentheses-mode)
+(add-hook 'clojure-mode-hook (lambda ()
+			       (clj-refactor-mode 1)
+			       (cljr-add-keybindings-with-prefix "C-c C-m")))
 
 ;; org-mode
 (global-set-key "\C-cl" 'org-store-link)
