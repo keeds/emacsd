@@ -59,6 +59,7 @@
 		      sass-mode
 		      ;; org
 		      clj-refactor
+		      company-cider
 		      ))
 
 (dolist (p my-packages)
@@ -155,8 +156,10 @@
 (require 'ibuffer)
 (setq ibuffer-saved-filter-groups
       (quote (("default"      
-	       ("Org" ;; all org-related buffers
-		(mode . org-mode))  
+	       ("BoM"
+		(filename . "Projects/bom"))
+	       ("Mobile"
+		(filename . "Projects/cordova"))
 	       ("WS5"
 		(filename . "Projects/ws5"))
 	       ("MRep"
@@ -167,8 +170,8 @@
 		(filename . "Projects/poles"))
 	       ("Casca"
 		(filename . "Projects/casca"))
-	       ("Mobile"
-		(filename . "Projects/cordova"))
+	       ("Org" ;; all org-related buffers
+		(mode . org-mode))
 	       ("Programming" ;; prog stuff not already in MyProject
 		(or
 		 (mode . emacs-lisp-mode)
@@ -196,6 +199,9 @@
 (add-hook 'clojure-mode-hook (lambda ()
 			       (clj-refactor-mode 1)
 			       (cljr-add-keybindings-with-prefix "C-c C-m")))
+
+(eval-after-load 'company '(add-to-list 'company-backends 'company-cider))
+
 
 ;; org-mode
 (global-set-key "\C-cl" 'org-store-link)
