@@ -59,7 +59,7 @@
 		      sass-mode
 		      ;; org
 		      clj-refactor
-		      company-cider
+		      ;; company-cider
 		      ))
 
 (dolist (p my-packages)
@@ -200,7 +200,7 @@
 			       (clj-refactor-mode 1)
 			       (cljr-add-keybindings-with-prefix "C-c C-m")))
 
-(eval-after-load 'company '(add-to-list 'company-backends 'company-cider))
+;; (eval-after-load 'company '(add-to-list 'company-backends 'company-cider))
 
 
 ;; org-mode
