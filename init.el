@@ -1,4 +1,5 @@
 
+
 (setq inhibit-startup-screen t)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -25,11 +26,11 @@
 	     '("melpa" .
 	       "http://melpa.milkbox.net/packages/") t)
 
-;; (add-to-list 'package-archives
-;; 	     '("marmalade" .
-;; 	       "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+	     '("marmalade" .
+	       "http://marmalade-repo.org/packages/") t)
 
-;; (package-refresh-contents)
+(package-refresh-contents)
 (package-initialize)
 
 (defvar my-packages '(dash
@@ -64,6 +65,18 @@
 
 (dolist (p my-packages)
   (when (not (package-installed-p p)) (package-install p)))
+
+
+;; org babel - clojure
+(add-to-list 'load-path "/Users/Keeds/elisp/org-mode/lisp")
+(require 'cider)
+(setq org-babel-clojure-backend 'cider)
+(require 'ob-clojure)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((gnuplot . t)))
+
 
 (require 'exec-path-from-shell)
 (when (memq window-system '(mac ns))
@@ -204,12 +217,20 @@
 
 
 ;; org-mode
+(require 'org)
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
 (add-hook 'org-mode-hook 'turn-on-font-lock)
+
+
+;; use cider as the clojure execution backend
+;; (require 'org)
+(require 'ob-clojure)
+
+(setq org-babel-clojure-backend 'cider)
 
 
 (require 'popup)
