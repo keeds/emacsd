@@ -259,6 +259,20 @@
                (file-writable-p buffer-file-name))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
+(defun nrepl-reset ()
+  (interactive)
+  (save-some-buffers)
+  ;; (set-buffer "*nrepl*")
+  (cider-switch-to-repl-buffer)
+  (goto-char (point-max))
+  (insert "(user/reset)")
+  ;; (nrepl-return)
+  (cider-repl-return))
+
+(global-set-key (kbd "C-c r") 'nrepl-reset)
+
+(cider-switch-to-repl-buffer)
+(cider-repl-return)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
