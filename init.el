@@ -39,10 +39,7 @@
 		      cider
 		      pkg-info
 		      gist
-		      ;; clojurescript-mode
-		      ;; cljdoc
 		      align-cljlet
-		      ;; cljsbuild-mode
 		      eldoc
 		      paredit
 		      auto-complete
@@ -55,12 +52,12 @@
 		      rainbow-delimiters
 		      highlight-parentheses
 		      yaml-mode
-		      ;; graphviz-dot-mode
 		      exec-path-from-shell
 		      sass-mode
 		      ;; org
 		      clj-refactor
-		      ;; company-cider
+		      gnuplot
+		      gnuplot-mode
 		      ))
 
 (dolist (p my-packages)
@@ -226,11 +223,11 @@
 (add-hook 'org-mode-hook 'turn-on-font-lock)
 
 
-;; use cider as the clojure execution backend
-;; (require 'org)
-(require 'ob-clojure)
+;; ;; use cider as the clojure execution backend
+;; ;; (require 'org)
+;; (require 'ob-clojure)
 
-(setq org-babel-clojure-backend 'cider)
+;; (setq org-babel-clojure-backend 'cider)
 
 
 (require 'popup)
@@ -262,17 +259,13 @@
 (defun nrepl-reset ()
   (interactive)
   (save-some-buffers)
-  ;; (set-buffer "*nrepl*")
   (cider-switch-to-repl-buffer)
   (goto-char (point-max))
   (insert "(user/reset)")
-  ;; (nrepl-return)
   (cider-repl-return))
 
 (global-set-key (kbd "C-c r") 'nrepl-reset)
 
-(cider-switch-to-repl-buffer)
-(cider-repl-return)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
