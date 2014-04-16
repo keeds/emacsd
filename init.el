@@ -1,5 +1,4 @@
 
-
 (setq inhibit-startup-screen t)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
@@ -30,7 +29,7 @@
 	     '("marmalade" .
 	       "http://marmalade-repo.org/packages/") t)
 
-(package-refresh-contents)
+;; (package-refresh-contents)
 (package-initialize)
 
 (defvar my-packages '(dash
@@ -65,7 +64,7 @@
 
 
 ;; org babel - clojure
-(add-to-list 'load-path "/Users/Keeds/elisp/org-mode/lisp")
+(add-to-list 'load-path "~/elisp/org-mode/lisp")
 (require 'cider)
 (setq org-babel-clojure-backend 'cider)
 (require 'ob-clojure)
