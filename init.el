@@ -57,6 +57,11 @@
 		      clj-refactor
 		      gnuplot
 		      gnuplot-mode
+		      powerline
+		      gh
+		      ghc
+		      ghci-completion
+		      haskell-mode
 		      ))
 
 (dolist (p my-packages)
@@ -264,6 +269,9 @@
   (cider-repl-return))
 
 (global-set-key (kbd "C-c r") 'nrepl-reset)
+
+(require 'powerline)
+(powerline-center-theme)
 
 
 (custom-set-variables
